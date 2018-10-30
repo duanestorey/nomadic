@@ -12,4 +12,9 @@ class Friend extends Model
         'meeting_point',
         'is_mutual'
     ];
+
+    public function requested()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

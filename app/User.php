@@ -32,4 +32,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Location');
     }
+
+    public function friends()
+    {
+    	return $this->hasMany('App\Friend');
+    }
 }

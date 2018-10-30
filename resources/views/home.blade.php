@@ -95,7 +95,7 @@
 			$('#friend-search').on('keyup', function(){
 				$('#friends-results').empty();
 
-				$.get('/friends/?q='+$(this).val(), function( data ) {
+				$.get('/friends/search/?q='+$(this).val(), function( data ) {
 
 				    $.each( JSON.parse(data) , function( key, value ){
 					    $('#friends-results').append('<li class="friend list-group-item" data-request-name="'+value.name+'" data-request-id="'+value.email+'">' + value.name + '&nbsp;<a href="#" class="add-friend btn btn-sm btn-secondary">Add friend</a></li>');
@@ -114,8 +114,6 @@
 				populateFriendForm(el);
 				$('#request-friendship').submit();
 			});
-
-
 
 		})
 
