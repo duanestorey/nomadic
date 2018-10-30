@@ -27,8 +27,10 @@ Route::get('get-location', function () {
 });
 
 Route::get('geocode', 'LocationsController@geocode');
+Route::get('friends', 'FriendsController@search');
+Route::post('friends', 'FriendsController@request');
 Route::post('location', 'LocationsController@store');
 
 Auth::routes();
 
-Route::get('/home', 'LocationsController@index')->name('home');
+Route::get('/home', 'LocationsController@index')->name('home')->middleware('auth');

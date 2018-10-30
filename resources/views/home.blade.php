@@ -91,11 +91,40 @@
 				});
 			});
 
+
+			$('#friend-search').on('keyup', function(){
+				$('#friends-results').empty();
+
+				$.get('/friends/?q='+$(this).val(), function( data ) {
+
+				    $.each( JSON.parse(data) , function( key, value ){
+					    $('#friends-results').append('<li class="friend list-group-item" data-request-name="'+value.name+'" data-request-id="'+value.email+'">' + value.name + '&nbsp;<a href="#" class="add-friend btn btn-sm btn-secondary">Add friend</a></li>');
+					});
+
+				});
+			});
+
+			$('#friends-results').on('click', '.friend' ,function(e) {
+				populateFriendForm(this);
+			});
+
+			$('#friends-results').on('click', '.add-friend' ,function(e) {
+				e.preventDefault();
+				var el = $(this).parent();
+				populateFriendForm(el);
+				$('#request-friendship').submit();
+			});
+
+
+
 		})
 
-		
+		function populateFriendForm(el)
+		{
+			$('#friend-search').val($(el).attr('data-request-name'));
+			$('#request-friendship input[name="email"]').val($(el).attr('data-request-id'));
+		}		
 		
 
 	</script>
-
 @endsection

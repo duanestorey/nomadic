@@ -31,7 +31,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                    	@auth
+							<form action="/friends" method="POST" id="request-friendship">
+								@csrf
+								<input type="text" name="q" id="friend-search" class="form-control" placeholder="Find a friend to share your travel locations with" autocomplete="off">
+								<input type="hidden" name="email">
+								<ul id="friends-results" class="list-group"></ul>
+							</form>
+						@endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
