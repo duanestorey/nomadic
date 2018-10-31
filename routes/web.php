@@ -36,4 +36,4 @@ Route::middleware('auth')->group(function () {
 });
 Auth::routes();
 
-Route::get('/home', 'LocationsController@index')->name('home')->middleware('auth');
+Route::get('/', 'LocationsController@index')->name('home')->middleware('auth');

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Friend;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class FriendsController extends Controller
 {
@@ -20,8 +19,8 @@ class FriendsController extends Controller
 
 	public function index()
 	{
-		$friendRequests = DB::table('friends')->where('friend_id', $this->user->id)->where('is_mutual',0)->get();	
-		$friends = DB::table('friends')->where('user_id', $this->user->id)->get();
+		$friendRequests =  Friend::where('friend_id', $this->user->id)->where('is_mutual',0)->get();	
+		$friends = Friend::where('user_id', $this->user->id)->get();
 
 		return view('friends', compact('friends','friendRequests'));
 	}

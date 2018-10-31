@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Validator;
 use App\Location;
+use App\User;
 use Illuminate\Http\Request;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
@@ -13,9 +14,11 @@ class LocationsController extends Controller
 
 	public function index()
 	{
-		$location = Location::where('user_id', auth()->user()->id)->orderBy('created_at', 'DESC')->take(1)->first();
+		$user = auth()->user();
+		$location = Location::where('user_id', $user->id)->orderBy('created_at', 'DESC')->take(1)->first();
+		$friends = $user->friendsLocations();
 
-		return view('home', compact('location'));
+		return view('home', compact('location', 'friends'));
 	}
 
 	public function store(Request $request)
@@ -40,8 +43,8 @@ class LocationsController extends Controller
         $location = (new Location)->create([
         	'latitude' => $cordinates[0],
         	'longitude' => $cordinates[1],
-        	'city' => $geocode->address->city,
-        	'country' => $geocode->address->country,
+        	'city' => !isset($geocode->error) ? $geocode->address->city : null,
+        	'country' => !isset($geocode->error) ? $geocode->address->country : null,
         	'note' => null,
         	'user_id' => auth()->user()->id
         ]);

@@ -36,4 +36,9 @@ class Location extends Model
     {
     	return $this->longitude;
     }
+
+    public function ofUser()
+    {
+    	
+    }
 }

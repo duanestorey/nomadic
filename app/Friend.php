@@ -17,4 +17,11 @@ class Friend extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function name($id)
+    {
+    	$user = \App\User::findOrFail($id);
+
+    	return $user->name;
+    }
 }

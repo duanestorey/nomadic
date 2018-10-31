@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -35,6 +36,35 @@ class User extends Authenticatable
 
     public function friends()
     {
-    	return $this->hasMany('App\Friend');
+    	$sql = "select f1.*
+				from friends f1
+				inner join friends f2 on f1.user_id = f2.friend_id and f1.friend_id = f2.user_id 
+				where f1.user_id = {$this->id}";
+
+    	$friends = DB::select(DB::raw($sql));
+
+    	return $friends;
+    }
+
+    public function friendsLocations()
+    {
+    	$friends = $this->friends();
+    	
+    	foreach ($friends as $friend) 
+    	{
+    		$location = \App\Location::where('user_id', $friend->friend_id)->orderBy('created_at', 'DESC')->take(1)->first();
+		    $data = [
+		    	'friend_id' => $friend->friend_id,
+		    	'name' => $location->user->name,
+		    	'lat' => $location->latitude,
+		    	'lon' => $location->longitude,
+		    	'city' => $location->city,
+		    	'country' => $location->country,
+		    ];
+
+		    $locations[] = (object) $data;
+		} 
+
+		return $locations;
     }
 }
