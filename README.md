@@ -1,6 +1,6 @@
-# nomadic
+# Nomadic
 
-First checkin
+An easy to use web interface for tracking digital nomads as they move across the planet for work and beers. Created by Nicki Frandsen and Duane Storey
 
 ## Deployment to do
 - map domain til nomadic/public
