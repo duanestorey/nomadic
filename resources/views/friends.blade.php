@@ -14,7 +14,7 @@
 			</form>
 		</div>
 
-		@if(!empty($friendRequests))
+		@if(!empty($friendRequests)) 
 		<div class="pending-requests-section mt-3">
 			<h3 class="h5">Pending Requests</h3>
 			<ul class="list-group">
