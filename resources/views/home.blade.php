@@ -76,7 +76,6 @@
 					$('#current-location').html(data.city + ', ' + data.country + '.');
 					$('.get-location').html('Update my location');
 					L.marker([data.lat, data.lon], {}).addTo(map).bindPopup('');
-					console.log(data);
 				});
 			})
 
@@ -86,7 +85,6 @@
 				$.get('/geocode/?q='+$(this).val(), function( data ) {
 
 				    $.each( data , function( key, value ){					
-				    	console.log(value.geometry.coordinates);
 					     $('#location-results').append('<li class="location list-group-item" data-location-city="'+value.properties.name+'" data-location-country="'+value.properties.name+'" data-location-coordinates="'+value.geometry.coordinates[1]+','+ value.geometry.coordinates[0] +'">'+value.properties.name + ', ' + value.properties.country +'</li>');
 					});
 

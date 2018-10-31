@@ -48,21 +48,31 @@ class User extends Authenticatable
 
     public function friendsLocations()
     {
+
+    	$locations = [];
     	$friends = $this->friends();
     	
+    	if ( !$friends)
+    	{
+    		return null;
+    	}
+
     	foreach ($friends as $friend) 
     	{
     		$location = \App\Location::where('user_id', $friend->friend_id)->orderBy('created_at', 'DESC')->take(1)->first();
-		    $data = [
-		    	'friend_id' => $friend->friend_id,
-		    	'name' => $location->user->name,
-		    	'lat' => $location->latitude,
-		    	'lon' => $location->longitude,
-		    	'city' => $location->city,
-		    	'country' => $location->country,
-		    ];
+    		if (!empty($location))
+    		{
+			    $data = [
+			    	'friend_id' => $friend->friend_id,
+			    	'name' => $location->user->name,
+			    	'lat' => $location->latitude,
+			    	'lon' => $location->longitude,
+			    	'city' => $location->city,
+			    	'country' => $location->country,
+			    ];
 
-		    $locations[] = (object) $data;
+			    $locations[] = (object) $data;
+			}
 		} 
 
 		return $locations;
