@@ -66,8 +66,6 @@
 		}).addTo(map);
 
 		$(document).ready(function() {
-			$('#demo').html('test');
-		
 			$('.get-location').on('click', function(e) {
 				e.preventDefault();
 
