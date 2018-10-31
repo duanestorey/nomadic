@@ -47,7 +47,7 @@ class FriendsController extends Controller
 			'is_mutual' => 0
 		]);
 
-    	dd($friendRequest);
+    	return back();
     }
 
     public function approve($id)
