@@ -18,10 +18,6 @@ class AppServiceProvider extends ServiceProvider
     {
         // Added to work with Maria DB
         Schema::defaultStringLength(191);
-
-        if (env('APP_ENV') === 'production') {
-            $this->app['url']->forceScheme('https');
-        }
     }
 
     /**
@@ -32,5 +28,9 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+
+        if (env('APP_ENV') === 'production') {
+            $this->app['url']->forceScheme('https');
+        }        
     }
 }
