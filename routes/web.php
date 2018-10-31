@@ -33,7 +33,8 @@ Route::middleware('auth')->group(function () {
 	Route::get('friends/approve/{id}', 'FriendsController@approve');
 	Route::post('friends', 'FriendsController@request');
 	Route::post('location', 'LocationsController@store');
+	Route::get('/', 'LocationsController@index');
 });
 Auth::routes();
 
-Route::get('/', 'LocationsController@index')->name('home')->middleware('auth');
+Route::get('/home', 'LocationsController@index')->name('home')->middleware('auth');
