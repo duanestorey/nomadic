@@ -14,9 +14,11 @@
 			</form>
 		</div>
 
-		@if(!empty($friendRequests)) 
+
+		@if(!$friendRequests->isEmpty()) 
 		<div class="pending-requests-section mt-3">
 			<h3 class="h5">Pending Requests</h3>
+						
 			<ul class="list-group">
 				@foreach($friendRequests as $friend)
 					<li class="list-group-item d-flex justify-content-between align-items-center">
@@ -31,14 +33,18 @@
 		<div class="approved-friends-section mt-3">
 			<h3 class="h5">Friends</h3>
 			<ul id="friends-results" class="list-group">
-
-				@foreach($friends as $friend)
-					<li class="list-group-item d-flex justify-content-between align-items-center">
-						{{ $friend->name($friend->friend_id) }}&nbsp;&nbsp;
-					</li>
-				@endforeach
+				@if($friends->isEmpty()) 
+					<p>{{ __( 'You currently do not have any friends')}}</p>
+				@else
+					@foreach($friends as $friend)
+						<li class="list-group-item d-flex justify-content-between align-items-center">
+							{{ $friend->name($friend->friend_id) }}&nbsp;&nbsp;
+						</li>
+					@endforeach
+				@endif
 			</ul>
 		</div>
+		
 
 	</div> <!-- /.container-fluid -->-
 @endsection

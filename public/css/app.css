@@ -11112,3 +11112,41 @@ a.text-dark:focus {
   height: 75vh;
 }
 
+body.template-home main .container-fluid,
+body.template-friends main .container-fluid {
+  max-width: 90%;
+  margin: auto;
+}
+
+body.template-login,
+body.template-register {
+  background-image: url(/images/test3.jpg?f280043e9df9cf4d6da416d2714e7a08);
+  background-size: cover;
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+body.template-login .navbar,
+body.template-register .navbar {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+body.template-login .col-md-8,
+body.template-register .col-md-8 {
+  margin-top: 10%;
+}
+
+body.template-login .card,
+body.template-register .card {
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+body.template-login footer,
+body.template-register footer {
+  position: absolute;
+  bottom: 10px;
+  text-align: center;
+  width: 100%;
+}
+
