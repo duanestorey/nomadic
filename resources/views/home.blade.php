@@ -97,6 +97,19 @@
         				var longitude = position.coords.longitude; 
 
         				alert( latitude + ' ' + longitude );
+
+        				var params = {
+        					'format': 'json',
+        					'lat': latitude,
+        					'lon': longitude,
+        					'zoom': 10,
+        					'addressdetails': 1,
+        					'accept-language': 'en'
+        				};
+
+        				$.get( 'https://nominatim.openstreetmap.org/reverse', params, function( resp ) {
+        					alert( resp );
+        				} );
 					 });
 				} else {
 					$.get('/get-location', function( data ) {
