@@ -12,7 +12,7 @@
 					@if (empty($location->city))
 					<input type="text" name="location" id="location-search-field" class="form-control" placeholder="Where in the world are you right now?" autocomplete="off">
 					@else
-					<input type="text" name="location" id="location-search-field" class="form-control" placeholder="Currently in {{$location->city}}, {{$location->country}}" autocomplete="off">
+					<input type="text" name="location" id="location-search-field" class="form-control" placeholder="In {{$location->city}}, {{$location->country}}" autocomplete="off">
 					@endif
 
 					<input type="hidden" name="location" id="location-search" />
