@@ -36,7 +36,7 @@
 					<p>{{ __( 'You currently do not have any friends')}}</p>
 				@else
 					@foreach($friends as $friend)
-						<li class="list-group-item d-flex justify-content-between align-items-center">
+						<li class="list-group-item d-flex justify-content-between align-items-left">
 							<span class="name">{{ $friend->name($friend->friend_id) }}&nbsp;&nbsp;</span>
 
 							<?php $location = $friend->getUser()->lastLocation(); ?>
