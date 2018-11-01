@@ -89,12 +89,23 @@
 			$('.get-location').on('click', function(e) {
 				e.preventDefault();
 
-				$.get('/get-location', function( data ) {
-					$('#location-search').val( data.lat + ',' + data.lon );
-					$('#location-search-field').val( data.city + ', ' + data.country );
-					//$('.get-location').html('Update my location');
-					L.marker([data.lat, data.lon], {}).addTo(map).bindPopup('');
-				});
+				// Check if we have geolocation
+				var geo = navigator.geolocation; 
+				if ( geo ) {
+					 geo.getCurrentPosition( function( position ) {
+						var latitude = position.coords.latitude;        
+        				var longitude = position.coords.longitude; 
+
+        				alert( latitude + ' ' + longitude );
+					 });
+				} else {
+					$.get('/get-location', function( data ) {
+						$('#location-search').val( data.lat + ',' + data.lon );
+						$('#location-search-field').val( data.city + ', ' + data.country );
+						//$('.get-location').html('Update my location');
+						L.marker([data.lat, data.lon], {}).addTo(map).bindPopup('');
+					});					
+				}
 			})
 
 			$('#location-search-field').on('keyup', function(){
