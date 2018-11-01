@@ -34,6 +34,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Location');
     }
 
+    public function lastLocation() {
+        return Location::where('user_id', $this->id)->orderBy('created_at', 'DESC')->take(1)->first();
+    }
+
     public function friends()
     {
     	$sql = "select f1.*
@@ -48,7 +52,6 @@ class User extends Authenticatable
 
     public function friendsLocations()
     {
-
     	$locations = [];
     	$friends = $this->friends();
     	

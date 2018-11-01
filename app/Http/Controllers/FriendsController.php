@@ -21,8 +21,9 @@ class FriendsController extends Controller
 	{
 		$friendRequests =  Friend::where('friend_id', $this->user->id)->where('is_mutual',0)->get();	
 		$friends = Friend::where('user_id', $this->user->id)->get();
+        $myself = User::where('id', $this->user->id)->first();
 
-		return view('friends', compact('friends','friendRequests'));
+		return view('friends', compact('friends','friendRequests','myself'));
 	}
 
     public function search(Request $request)
