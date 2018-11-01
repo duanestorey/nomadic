@@ -18,3 +18,41 @@
 #map {
 	height: 75vh;
 }
+
+// Added by Duane
+
+body.template-home,
+body.template-friends {
+	main .container-fluid {
+		max-width: 90%;
+		margin: auto;
+	}
+}
+
+body.template-login,
+body.template-register {
+	background-image: url( '../images/test3.jpg' );
+	background-size: cover;
+	background-position: bottom right;
+	background-repeat: no-repeat;
+	height: 100vh;
+
+	.navbar {
+		background-color: rgba( 255, 255, 255, 0.7 )
+	}
+
+	.col-md-8 {
+		margin-top: 10%;
+	}
+
+	.card {
+		background-color: rgba( 255, 255, 255, 0.85 );
+	}
+
+	footer {
+		position: absolute;
+		bottom: 10px;
+		text-align: center;
+		width: 100%;
+	}
+}

@@ -7,22 +7,21 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Nomadic</title>
+    <title>Nomadic - {{ _('Find Digital Nomads Near You' )}}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
-
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body class="template-{{ collect(\Request::segments())->implode('-') }}">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/home') }}">
-                    Nomadic
+                    Nomadic - {{ _('Find Digital Nomads Near You' )}}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -80,5 +79,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
 
     @yield('scripts')
+
+   <!-- <footer>Copyright 2018 by Nicki Frandsen and Duane Storey<footer> -->
 </body>
 </html>
