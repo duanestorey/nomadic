@@ -108,7 +108,7 @@
         				};
 
         				$.get( 'https://nominatim.openstreetmap.org/reverse', params, function( resp ) {
-        					alert( resp.city + resp.country );
+        					alert( resp.address.city + resp.address.country );
         				} );
 					 });
 				} else {
