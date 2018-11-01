@@ -60,7 +60,7 @@
 					@foreach($friends as $friend)
 						<tr>
 							<td class="name">
-								<img src="https://gravatar.com/avatar/<?php echo md5( $friend->getUser()->email ); ?>.png?s=64" />
+								<img src="https://gravatar.com/avatar/<?php echo md5( $friend->getUser()->email ); ?>.png?s=64&d=mp" />
 								{{ $friend->name($friend->friend_id) }}&nbsp;&nbsp;
 							</td>
 
