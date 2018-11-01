@@ -12,7 +12,7 @@
 					@if (empty($location->city))
 					<input type="text" name="location" id="location-search-field" class="form-control" placeholder="Where in the world are you right now?" autocomplete="off">
 					@else
-					<input type="text" name="location" id="location-search-field" class="form-control" placeholder="Currently in {{$location->city}}, {{$location->country}}" autocomplete="off">
+					<input type="text" name="location" id="location-search-field" class="form-control" placeholder="In {{$location->city}}, {{$location->country}}" autocomplete="off">
 					@endif
 
 					<input type="hidden" name="location" id="location-search" />
@@ -39,9 +39,14 @@
 @section('scripts')
 
 	<script>
+		var ourCenter = [15,0];
+		@if($location)
+			ourCenter = [{{ $location->lat }}, {{ $location->lon }}];
+		@endif
+
 		var map = L.map('map', {
-		    center: [15,0],
-		    zoom: 2,
+		    center: ourCenter,
+		    zoom: 4,
 		    fitWorld: true,
 		    minZoom: 2,
 		    noWrap: true,
@@ -52,11 +57,23 @@
 		    ]
 		});
 
+		var greenIcon = new L.Icon({
+		  iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+		  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+		  iconSize: [25, 41],
+		  iconAnchor: [12, 41],
+		  popupAnchor: [1, -34],
+		  shadowSize: [41, 41]
+		});
+
+		
 		@if($location)
-			L.marker([{{ $location->lat }}, {{ $location->lon }}], {})
+			L.marker([{{ $location->lat }}, {{ $location->lon }}], {icon: greenIcon})
 			 .addTo(map)
 			 .bindPopup('{{ $location->user->name }} is currently in {{ $location->city }} {{ $location->country }}');
-		@endif
+
+			
+		@endif			
 
 		@if($friends)
 			@foreach($friends as $friend)

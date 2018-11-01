@@ -3,9 +3,8 @@
 @section('content')
 
 	<div class="container-fluid">
-
 		<div class="find-friends-section">
-			<h3 class="h5">Find friends</h3>
+			<h3 class="h5">Find Friends</h3>
 			<form action="/friends" method="POST" id="request-friendship">
 				@csrf
 				<input type="text" name="q" id="friend-search" class="form-control" placeholder="Find a friend to share your travel locations with" autocomplete="off">
@@ -13,7 +12,6 @@
 				<ul id="friends-results" class="list-group"></ul>
 			</form>
 		</div>
-
 
 		@if(!$friendRequests->isEmpty()) 
 		<div class="pending-requests-section mt-3">
@@ -33,19 +31,67 @@
 		<div class="approved-friends-section mt-3">
 			<h3 class="h5">Friends</h3>
 			<ul id="friends-results" class="list-group">
+
 				@if($friends->isEmpty()) 
 					<p>{{ __( 'You currently do not have any friends')}}</p>
 				@else
 					@foreach($friends as $friend)
 						<li class="list-group-item d-flex justify-content-between align-items-center">
-							{{ $friend->name($friend->friend_id) }}&nbsp;&nbsp;
+							<span class="name">{{ $friend->name($friend->friend_id) }}&nbsp;&nbsp;</span>
+
+							<?php $friend_location = $friend->getUser()->lastLocation(); $my_location = $myself->lastLocation(); ?>
+							@if($friend_location)
+								<span class="their-location">{{$friend_location->city}}, {{$friend_location->country}}</span>
+								@if($my_location)
+								<span class="distance"><?php echo $my_location->distanceFrom( $friend_location ); ?> kms</span>
+								@else
+								<span class="distance">&nbsp;</span>
+								@endif
+							@else
+								<span class="their-location">&nbsp;</span>
+								<span class="distance">&nbsp;</span>
+							@endif
 						</li>
 					@endforeach
 				@endif
 			</ul>
-		</div>
-		
 
+			<br /><br />
+
+			<table id="friends-results" class="table table-bordered">
+				<thead class="thead-light">
+					<tr>
+						<th scope="col">Name</th>
+						<th scope="col">Current Location</th>
+						<th scope="col">Distance</th>
+					</tr>
+				</thead>
+				<tbody>
+				@if($friends->isEmpty()) 
+					<p>{{ __( 'You currently do not have any friends')}}</p>
+				@else
+					@foreach($friends as $friend)
+						<tr>
+							<td class="name">{{ $friend->name($friend->friend_id) }}&nbsp;&nbsp;</td>
+
+							<?php $friend_location = $friend->getUser()->lastLocation(); $my_location = $myself->lastLocation(); ?>
+							@if($friend_location)
+								<td class="their-location">{{$friend_location->city}}, {{$friend_location->country}}</td>
+								@if($my_location)
+								<td class="distance"><?php echo $my_location->distanceFrom( $friend_location ); ?> kms</td>
+								@else
+								<td class="distance">&nbsp;</span>
+								@endif
+							@else
+								<td class="their-location">&nbsp;</td>
+								<td class="distance">&nbsp;</td>
+							@endif
+						</tr>
+					@endforeach
+				@endif
+				</tbody>
+			</table>			
+		</div>
 	</div> <!-- /.container-fluid -->-
 @endsection
 

@@ -24,4 +24,10 @@ class Friend extends Model
 
     	return $user->name;
     }
+
+    public function getUser() {
+        $user = \App\User::findOrFail($this->friend_id);
+
+        return $user;
+    }
 }
