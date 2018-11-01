@@ -35,9 +35,9 @@
 	<script>
 		var map = L.map('map', {
 		    center: [15,0],
-		    zoom: 3,
+		    zoom: 2,
 		    fitWorld: true,
-		    minZoom: 3,
+		    minZoom: 2,
 		    noWrap: true,
 		    worldCopyJump: true,
 		    maxBounds: [
