@@ -55,6 +55,40 @@
 					@endforeach
 				@endif
 			</ul>
+
+			<table id="friends-results" class="table table-striped table-bordered table-sm">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Current Location</th>
+						<th>Distance</th>
+					</tr>
+				</thead>
+				<tbody>
+				@if($friends->isEmpty()) 
+					<p>{{ __( 'You currently do not have any friends')}}</p>
+				@else
+					@foreach($friends as $friend)
+						<tr>
+							<td class="name">{{ $friend->name($friend->friend_id) }}&nbsp;&nbsp;</td>
+
+							<?php $friend_location = $friend->getUser()->lastLocation(); $my_location = $myself->lastLocation(); ?>
+							@if($friend_location)
+								<td class="their-location">{{$friend_location->city}}, {{$friend_location->country}}</td>
+								@if($my_location)
+								<td class="distance"><?php echo $my_location->distanceFrom( $friend_location ); ?> kms</td>
+								@else
+								<td class="distance">&nbsp;</span>
+								@endif
+							@else
+								<td class="their-location">&nbsp;</td>
+								<td class="distance">&nbsp;</td>
+							@endif
+						</tr>
+					@endforeach
+				@endif
+				</tbody>
+			</ul>			
 		</div>
 	</div> <!-- /.container-fluid -->-
 @endsection
