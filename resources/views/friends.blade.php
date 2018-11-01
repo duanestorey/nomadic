@@ -59,9 +59,9 @@
 				@else
 					@foreach($friends as $friend)
 						<tr>
-							<td class="name align-top">
+							<td class="name">
 								<img src="https://gravatar.com/avatar/<?php echo md5( $friend->getUser()->email ); ?>.png?s=64&d=mp" />
-								{{ $friend->name($friend->friend_id) }}&nbsp;&nbsp;
+								<span class="align-top">{{ $friend->name($friend->friend_id) }}&nbsp;&nbsp;</span>
 							</td>
 
 							<?php $friend_location = $friend->getUser()->lastLocation(); $my_location = $myself->lastLocation(); ?>
