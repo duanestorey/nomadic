@@ -70,16 +70,14 @@
 		@if($location)
 			L.marker([{{ $location->lat }}, {{ $location->lon }}], {icon: greenIcon})
 			 .addTo(map)
-			 .bindPopup('{{ $location->user->name }} is currently in {{ $location->city }} {{ $location->country }}');
-
-			
+			 .bindPopup('My Location: {{ $location->city }}, {{ $location->country }}');
 		@endif			
 
 		@if($friends)
 			@foreach($friends as $friend)
 				L.marker([{{ $friend->lat }}, {{ $friend->lon }}], {})
 				 .addTo(map)
-				 .bindPopup('{{ $friend->name }} is currently in {{ $friend->city }} {{ $friend->country }}');
+				 .bindPopup('{{ $friend->name }} is currently in {{ $friend->city }}, {{ $friend->country }}');
 			@endforeach
 		@endif
 
