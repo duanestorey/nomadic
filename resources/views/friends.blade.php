@@ -56,12 +56,14 @@
 				@endif
 			</ul>
 
-			<table id="friends-results" class="table table-striped table-bordered table-sm">
-				<thead>
+			<br /><br />
+
+			<table id="friends-results" class="table table-bordered">
+				<thead class="thead-light">
 					<tr>
-						<th>Name</th>
-						<th>Current Location</th>
-						<th>Distance</th>
+						<th scope="col">Name</th>
+						<th scope="col">Current Location</th>
+						<th scope="col">Distance</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -88,7 +90,7 @@
 					@endforeach
 				@endif
 				</tbody>
-			</ul>			
+			</table>			
 		</div>
 	</div> <!-- /.container-fluid -->-
 @endsection
