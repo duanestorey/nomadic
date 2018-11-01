@@ -51,6 +51,7 @@
 		        [90, 180]
 		    ]
 		});
+
 		var greenIcon = new L.Icon({
 		  iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
 		  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
@@ -60,12 +61,6 @@
 		  shadowSize: [41, 41]
 		});
 
-		@if($location)
-			L.marker([{{ $location->lat }}, {{ $location->lon }}], {icon: greenIcon})
-			 .addTo(map)
-			 .bindPopup('{{ $location->user->name }} is currently in {{ $location->city }} {{ $location->country }}');
-		@endif
-
 		@if($friends)
 			@foreach($friends as $friend)
 				L.marker([{{ $friend->lat }}, {{ $friend->lon }}], {})
@@ -73,6 +68,14 @@
 				 .bindPopup('{{ $friend->name }} is currently in {{ $friend->city }} {{ $friend->country }}');
 			@endforeach
 		@endif
+
+		/* Place our location after friends so we are visibly on top for now */
+		
+		@if($location)
+			L.marker([{{ $location->lat }}, {{ $location->lon }}], {icon: greenIcon})
+			 .addTo(map)
+			 .bindPopup('{{ $location->user->name }} is currently in {{ $location->city }} {{ $location->country }}');
+		@endif		
 
 		L.tileLayer('https://c.tile.openstreetmap.org/{z}/{x}/{y}.png ', {
 		    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
