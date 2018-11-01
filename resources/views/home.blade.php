@@ -2,22 +2,28 @@
 
 @section('content')
 
-	<div class="container-fluid">
+	<div class="container-fluid current-location">
 		<form action="/location" method="post">
 
 			@csrf
 
 			<div class="form-row">
 				<div class="col">
-					<input type="text" name="location" id="location-search" class="form-control" placeholder="Where in the world are you right now?" autocomplete="off">
-					<p class="form-text">
-						<span id="current-location"></span> 
-						<a href="#" class="get-location">Get my location</a>
-					</p>
+					@if (empty($location->city))
+					<input type="text" name="location" id="location-search-field" class="form-control" placeholder="Where in the world are you right now?" autocomplete="off">
+					@else
+					<input type="text" name="location" id="location-search-field" class="form-control" placeholder="Currently in {{$location->city}}, {{$location->country}}" autocomplete="off">
+					@endif
+
+					<input type="hidden" name="location" id="location-search" />
 				</div>
-				
+
 				<div class="col-auto">
-					<button type="submit" class="btn btn-primary mb-2">Submit</button>
+					<button href="#" class="btn mb-2 get-location">Detect</button>	
+				</div>
+					
+				<div class="col-auto">
+					<button type="submit" class="btn btn-primary mb-2">Update</button>
 				</div>
 			</div>
 		</form>
@@ -70,19 +76,19 @@
 
 				$.get('/get-location', function( data ) {
 					$('#location-search').val( data.lat + ',' + data.lon );
-					$('#current-location').html(data.city + ', ' + data.country + '.');
-					$('.get-location').html('Update my location');
+					$('#location-search-field').val( data.city + ', ' + data.country );
+					//$('.get-location').html('Update my location');
 					L.marker([data.lat, data.lon], {}).addTo(map).bindPopup('');
 				});
 			})
 
-			$('#location-search').on('keyup', function(){
+			$('#location-search-field').on('keyup', function(){
 				$('#location-results').empty();
 
 				$.get('/geocode/?q='+$(this).val(), function( data ) {
 
 				    $.each( data , function( key, value ){					
-					     $('#location-results').append('<li class="location list-group-item" data-location-city="'+value.properties.name+'" data-location-country="'+value.properties.name+'" data-location-coordinates="'+value.geometry.coordinates[1]+','+ value.geometry.coordinates[0] +'">'+value.properties.name + ', ' + value.properties.country +'</li>');
+					     $('#location-results').append('<li class="location list-group-item" data-location-city="'+value.properties.name+'" data-location-country="'+value.properties.country+'" data-location-coordinates="'+value.geometry.coordinates[1]+','+ value.geometry.coordinates[0] +'">'+value.properties.name + ', ' + value.properties.country +'</li>');
 					});
 
 				});
@@ -97,8 +103,11 @@
 		function populateLocationForm(el)
 		{
 			$('#location-search').val($(el).attr('data-location-coordinates'));
+			$('#location-search-field').val($(el).attr('data-location-city') + ', ' + $(el).attr('data-location-country') );
 			$('#location-search-coordinates').val($(el).attr('data-location-coordinates'));
 			$('#request-friendship input[name="email"]').val($(el).attr('data-request-id'));
+
+			$('#location-results').empty();
 		}		
 		
 

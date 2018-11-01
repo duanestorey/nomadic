@@ -27,6 +27,10 @@ body.template-friends {
 		max-width: 90%;
 		margin: auto;
 	}
+
+	main .current-location form {
+		margin-bottom: 10px;
+	}
 }
 
 body.template-login,
@@ -56,3 +60,4 @@ body.template-register {
 		width: 100%;
 	}
 }
+
