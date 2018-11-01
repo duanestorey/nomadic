@@ -96,8 +96,6 @@
 						var latitude = position.coords.latitude;        
         				var longitude = position.coords.longitude; 
 
-        				alert( latitude + ' ' + longitude );
-
         				var params = {
         					'format': 'json',
         					'lat': latitude,
@@ -108,7 +106,9 @@
         				};
 
         				$.get( 'https://nominatim.openstreetmap.org/reverse', params, function( resp ) {
-        					alert( resp.address.city + resp.address.country );
+        					$('#location-search').val( latitude + ',' + longitude );
+							$('#location-search-field').val( resp.address.city + ', ' + resp.address.country );
+							L.marker([data.lat, data.lon], {}).addTo(map).bindPopup('');
         				} );
 					 });
 				} else {
