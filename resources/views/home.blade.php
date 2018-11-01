@@ -70,16 +70,14 @@
 		@if($location)
 			L.marker([{{ $location->lat }}, {{ $location->lon }}], {icon: greenIcon})
 			 .addTo(map)
-			 .bindPopup('{{ $location->user->name }} is currently in {{ $location->city }} {{ $location->country }}');
-
-			
+			 .bindPopup('My Location: {{ $location->city }}, {{ $location->country }}');
 		@endif			
 
 		@if($friends)
 			@foreach($friends as $friend)
 				L.marker([{{ $friend->lat }}, {{ $friend->lon }}], {})
 				 .addTo(map)
-				 .bindPopup('{{ $friend->name }} is currently in {{ $friend->city }} {{ $friend->country }}');
+				 .bindPopup('{{ $friend->name }} is currently in {{ $friend->city }}, {{ $friend->country }}');
 			@endforeach
 		@endif
 
@@ -91,12 +89,36 @@
 			$('.get-location').on('click', function(e) {
 				e.preventDefault();
 
-				$.get('/get-location', function( data ) {
-					$('#location-search').val( data.lat + ',' + data.lon );
-					$('#location-search-field').val( data.city + ', ' + data.country );
-					//$('.get-location').html('Update my location');
-					L.marker([data.lat, data.lon], {}).addTo(map).bindPopup('');
-				});
+				// Check if we have geolocation
+				var geo = navigator.geolocation; 
+				if ( geo ) {
+					 geo.getCurrentPosition( function( position ) {
+						var latitude = position.coords.latitude;        
+        				var longitude = position.coords.longitude; 
+
+        				var params = {
+        					'format': 'json',
+        					'lat': latitude,
+        					'lon': longitude,
+        					'zoom': 10,
+        					'addressdetails': 1,
+        					'accept-language': 'en'
+        				};
+
+        				$.get( 'https://nominatim.openstreetmap.org/reverse', params, function( resp ) {
+        					$('#location-search').val( latitude + ',' + longitude );
+							$('#location-search-field').val( resp.address.city + ', ' + resp.address.country );
+							L.marker([data.lat, data.lon], {}).addTo(map).bindPopup('');
+        				} );
+					 });
+				} else {
+					$.get('/get-location', function( data ) {
+						$('#location-search').val( data.lat + ',' + data.lon );
+						$('#location-search-field').val( data.city + ', ' + data.country );
+						//$('.get-location').html('Update my location');
+						L.marker([data.lat, data.lon], {}).addTo(map).bindPopup('');
+					});					
+				}
 			})
 
 			$('#location-search-field').on('keyup', function(){
