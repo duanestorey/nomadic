@@ -77,7 +77,8 @@ class LocationsController extends Controller
 		        'lat' => $lat,
 		        'lon' => $lon,
 		        'zoom' => 10,
-		        'addressdetails' => 1
+		        'addressdetails' => 1,
+		        'accept-language' => 'en'
 		    ]
 		]);
 
