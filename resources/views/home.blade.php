@@ -3,7 +3,6 @@
 @section('content')
 
 	<div class="container-fluid">
-
 		<form action="/location" method="post">
 
 			@csrf
