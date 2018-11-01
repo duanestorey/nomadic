@@ -11118,6 +11118,11 @@ body.template-friends main .container-fluid {
   margin: auto;
 }
 
+body.template-home main .current-location form,
+body.template-friends main .current-location form {
+  margin-bottom: 10px;
+}
+
 body.template-login,
 body.template-register {
   background-image: url(/images/test3.jpg?f280043e9df9cf4d6da416d2714e7a08);
