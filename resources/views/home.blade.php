@@ -39,9 +39,14 @@
 @section('scripts')
 
 	<script>
+		var ourCenter = [15,0];
+		@if($location)
+			ourCenter = [{{ $location->lat }}, {{ $location->lon }}];
+		@endif
+
 		var map = L.map('map', {
-		    center: [15,0],
-		    zoom: 2,
+		    center: ourCenter,
+		    zoom: 4,
 		    fitWorld: true,
 		    minZoom: 2,
 		    noWrap: true,
@@ -61,6 +66,15 @@
 		  shadowSize: [41, 41]
 		});
 
+		
+		@if($location)
+			L.marker([{{ $location->lat }}, {{ $location->lon }}], {icon: greenIcon})
+			 .addTo(map)
+			 .bindPopup('{{ $location->user->name }} is currently in {{ $location->city }} {{ $location->country }}');
+
+			
+		@endif			
+
 		@if($friends)
 			@foreach($friends as $friend)
 				L.marker([{{ $friend->lat }}, {{ $friend->lon }}], {})
@@ -68,14 +82,6 @@
 				 .bindPopup('{{ $friend->name }} is currently in {{ $friend->city }} {{ $friend->country }}');
 			@endforeach
 		@endif
-
-		/* Place our location after friends so we are visibly on top for now */
-		
-		@if($location)
-			L.marker([{{ $location->lat }}, {{ $location->lon }}], {icon: greenIcon})
-			 .addTo(map)
-			 .bindPopup('{{ $location->user->name }} is currently in {{ $location->city }} {{ $location->country }}');
-		@endif		
 
 		L.tileLayer('https://c.tile.openstreetmap.org/{z}/{x}/{y}.png ', {
 		    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
