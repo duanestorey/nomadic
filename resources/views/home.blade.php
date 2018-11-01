@@ -19,7 +19,7 @@
 				</div>
 
 				<div class="col-auto">
-					<button href="#" class="btn mb-2 get-location">Detect</button>	
+					<button href="#" class="btn btn-secondary mb-2 get-location">Detect</button>	
 				</div>
 					
 				<div class="col-auto">
