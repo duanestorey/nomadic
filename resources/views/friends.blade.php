@@ -38,19 +38,6 @@
 					@foreach($friends as $friend)
 						<li class="list-group-item d-flex justify-content-between align-items-center">
 							<span class="name">{{ $friend->name($friend->friend_id) }}&nbsp;&nbsp;</span>
-
-							<?php $friend_location = $friend->getUser()->lastLocation(); $my_location = $myself->lastLocation(); ?>
-							@if($friend_location)
-								<span class="their-location">{{$friend_location->city}}, {{$friend_location->country}}</span>
-								@if($my_location)
-								<span class="distance"><?php echo $my_location->distanceFrom( $friend_location ); ?> kms</span>
-								@else
-								<span class="distance">&nbsp;</span>
-								@endif
-							@else
-								<span class="their-location">&nbsp;</span>
-								<span class="distance">&nbsp;</span>
-							@endif
 						</li>
 					@endforeach
 				@endif
@@ -72,7 +59,10 @@
 				@else
 					@foreach($friends as $friend)
 						<tr>
-							<td class="name">{{ $friend->name($friend->friend_id) }}&nbsp;&nbsp;</td>
+							<td class="name">
+								<img src="https://gravatar.com/avatar/<?php echo md5( $friend->getUser()->email ); ?>.png?s=64" />
+								{{ $friend->name($friend->friend_id) }}&nbsp;&nbsp;
+							</td>
 
 							<?php $friend_location = $friend->getUser()->lastLocation(); $my_location = $myself->lastLocation(); ?>
 							@if($friend_location)
