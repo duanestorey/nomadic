@@ -11364,10 +11364,14 @@ __webpack_require__(12);
 
 
 
+<<<<<<< HEAD
 
 __WEBPACK_IMPORTED_MODULE_0_leaflet__["Icon"].Default.imagePath = '/images/vendor/leaflet/dist/';
+=======
+L.Icon.Default.imagePath = '/images/vendor/leaflet/dist/';
+>>>>>>> release
 
-__WEBPACK_IMPORTED_MODULE_0_leaflet__["Icon"].Default.prototype.options = {
+L.Icon.Default.prototype.options = {
   iconHtml: '<i class="glyphicon glyphicon-user" style="color: red"></i>',
   iconSize: [20, 70],
   iconAnchor: [10, 70]

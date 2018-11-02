@@ -7,7 +7,7 @@
 require('./bootstrap');
 
 
-import * as L from 'leaflet';
+import 'leaflet';
 import 'leaflet.markercluster';
 import 'jquery.typewatch';
 
