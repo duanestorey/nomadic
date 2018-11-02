@@ -7,7 +7,9 @@
 require('./bootstrap');
 
 
-require('leaflet');
+import * as L from 'leaflet';
+import 'leaflet.markercluster';
+
 L.Icon.Default.imagePath = '/images/vendor/leaflet/dist/';
 
 L.Icon.Default.prototype.options = {
