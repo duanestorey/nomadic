@@ -11351,6 +11351,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_leaflet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_leaflet__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_leaflet_markercluster__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_leaflet_markercluster___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_leaflet_markercluster__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery_typewatch__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery_typewatch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_jquery_typewatch__);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -11358,6 +11360,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  * building robust, powerful web applications using Vue and Laravel.
  */
 __webpack_require__(12);
+
 
 
 
@@ -64003,6 +64006,131 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
+*	TypeWatch 3
+*
+*	Examples/Docs: github.com/dennyferra/TypeWatch
+*  
+*  Dual licensed under the MIT and GPL licenses:
+*  http://www.opensource.org/licenses/mit-license.php
+*  http://www.gnu.org/licenses/gpl.html
+*/
+
+!function(root, factory) {
+    if (true) {
+        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(3)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+    } else if (typeof exports === 'object') {
+        factory(require('jquery'));
+    } else {
+        factory(root.jQuery);
+    }
+}(this, function($) {
+    'use strict';
+	$.fn.typeWatch = function(o) {
+		// The default input types that are supported
+		var _supportedInputTypes =
+			['TEXT', 'TEXTAREA', 'PASSWORD', 'TEL', 'SEARCH', 'URL', 'EMAIL', 'DATETIME', 'DATE', 'MONTH', 'WEEK', 'TIME', 'DATETIME-LOCAL', 'NUMBER', 'RANGE', 'DIV'];
+
+		// Options
+		var options = $.extend({
+			wait: 750,
+			callback: function() { },
+			highlight: true,
+			captureLength: 2,
+			allowSubmit: false,
+			inputTypes: _supportedInputTypes
+		}, o);
+
+		function checkElement(timer, override) {
+			var value = timer.type === 'DIV' 
+				? jQuery(timer.el).html()
+				: jQuery(timer.el).val();
+
+			// If has capture length and has changed value
+			// Or override and has capture length or allowSubmit option is true
+			// Or capture length is zero and changed value
+			if ((value.length >= options.captureLength && value != timer.text)
+				|| (override && (value.length >= options.captureLength || options.allowSubmit))
+				|| (value.length == 0 && timer.text))
+			{
+				timer.text = value;
+				timer.cb.call(timer.el, value);
+			}
+		};
+
+		function watchElement(elem) {
+			var elementType = (elem.type || elem.nodeName).toUpperCase();
+			if (jQuery.inArray(elementType, options.inputTypes) >= 0) {
+				
+				// Allocate timer element
+				var timer = {
+					timer: null,
+					text: (elementType === 'DIV') ? jQuery(elem).html() : jQuery(elem).val(),
+					cb: options.callback,
+					el: elem,
+					type: elementType,
+					wait: options.wait
+				};
+
+				// Set focus action (highlight)
+				if (options.highlight && elementType !== 'DIV')
+					jQuery(elem).focus(function() { this.select(); });
+
+				// Key watcher / clear and reset the timer
+				var startWatch = function(evt) {
+					var timerWait = timer.wait;
+					var overrideBool = false;
+					var evtElementType = elementType;
+
+					// If enter key is pressed and not a TEXTAREA or DIV
+					if (typeof evt.keyCode != 'undefined' && evt.keyCode == 13
+						&& evtElementType !== 'TEXTAREA' && elementType !== 'DIV')
+					{
+						console.log('OVERRIDE');
+						timerWait = 1;
+						overrideBool = true;
+					}
+
+					var timerCallbackFx = function() {
+						checkElement(timer, overrideBool)
+					}
+
+					// Clear timer
+					clearTimeout(timer.timer);
+					timer.timer = setTimeout(timerCallbackFx, timerWait);
+				};
+
+				jQuery(elem).on('keydown paste cut input', startWatch);
+			}
+		};
+
+		// Watch each element
+		return this.each(function() {
+			watchElement(this);
+		});
+	};
+});
+
 
 /***/ })
 /******/ ]);
