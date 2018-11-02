@@ -18,11 +18,12 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- home screen icon precomposed - 128x128 -->
-    <link rel="apple-touch-icon-precomposed" href="/images/icons/icon-128.png"/> 
+    <link rel="apple-touch-icon-precomposed" href="/images/icons/Icon-128.png"/> 
 
     <!-- home screen icon defaults - 48x48 -->
-    <link rel="apple-touch-icon" href="/images/icons/icon-48.png"/> 
-    <link rel="icon" href="/images/icons/icon-48.png" /> 
+    <link rel="apple-touch-icon" href="/images/icons/Icon-48.png"/> 
+    <link rel="icon" href="/images/icons/Icon-48.png" /> 
+    <link rel="icon" sizes="196x196" href="/images/icons/Icon-196.png"> 
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
