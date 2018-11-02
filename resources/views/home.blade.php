@@ -91,10 +91,15 @@
 		@endif
 
 		map.addLayer(markers);
-
+L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+		    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		}).addTo(map);
+		/*
 		L.tileLayer('https://c.tile.openstreetmap.org/{z}/{x}/{y}.png ', {
 		    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 		}).addTo(map);
+
+		*/
 
 		$(document).ready(function() {
 			$('.get-location').on('click', function(e) {
