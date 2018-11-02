@@ -11228,3 +11228,19 @@ body.template-register footer {
   width: 100%;
 }
 
+.live-search-results {
+  position: absolute;
+  width: 100%;
+  z-index: 999;
+  padding-right: 10px;
+}
+
+.live-search-results > li:first-child {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.live-search-results > li:hover {
+  background: #e8e8e8;
+}
+

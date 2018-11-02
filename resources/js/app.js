@@ -7,8 +7,9 @@
 require('./bootstrap');
 
 
-import * as L from 'leaflet';
+import 'leaflet';
 import 'leaflet.markercluster';
+import 'jquery.typewatch';
 
 L.Icon.Default.imagePath = '/images/vendor/leaflet/dist/';
 
@@ -30,7 +31,7 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app' 
 });
 
 
