@@ -64,3 +64,21 @@ body.template-register {
 	}
 }
 
+
+.live-search-results {
+	position: absolute;
+    width: 100%;
+    z-index: 999;
+    padding-right: 10px;
+    
+    > li {
+    	&:first-child {
+    		border-top-left-radius: 0;
+    		border-top-right-radius: 0;
+    	}
+
+    	&:hover {
+    		background: $light-gray;
+    	}
+    }
+}

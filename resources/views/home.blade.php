@@ -16,6 +16,8 @@
 					@endif
 
 					<input type="hidden" name="location" id="location-search" />
+
+					<ul id="location-results" class="list-group live-search-results"></ul>
 				</div>
 
 				<div class="col-auto">
@@ -28,11 +30,11 @@
 			</div>
 		</form>
 
-		<ul id="location-results" class="list-group"></ul>
-
-	    <section id="map"></section>
-
 	</div> <!-- /.container-fluid -->
+
+	<div class="container-fluid">
+		<section id="map"></section>
+	</div>
 
 @endsection
 
@@ -80,10 +82,17 @@
 
 		@if($friends)
 			@foreach($friends as $friend)
+<<<<<<< HEAD
+			markers.addLayer( 
+				L.marker([{{ $friend->lat }}, {{ $friend->lon }}], {})
+				 .bindPopup('{{ $friend->name }} is currently in {{ $friend->city }}, {{ $friend->country }}')
+			);
+=======
 				markers.addLayer(
 					L.marker([{{ $friend->lat }}, {{ $friend->lon }}], {})
 					 .bindPopup('{{ $friend->name }} is currently in {{ $friend->city }}, {{ $friend->country }}')
 				);
+>>>>>>> release
 			@endforeach
 		@endif
 
@@ -129,16 +138,22 @@
 				}
 			})
 
-			$('#location-search-field').on('keyup', function(){
-				$('#location-results').empty();
+			$('#location-search-field').typeWatch( {
+				callback: function (value) {
+					$('#location-results').empty();
 
-				$.get('/geocode/?q='+$(this).val(), function( data ) {
+					$.get('/geocode/?q='+$(this).val(), function( data ) {
 
-				    $.each( data , function( key, value ){					
-					     $('#location-results').append('<li class="location list-group-item" data-location-city="'+value.properties.name+'" data-location-country="'+value.properties.country+'" data-location-coordinates="'+value.geometry.coordinates[1]+','+ value.geometry.coordinates[0] +'">'+value.properties.name + ', ' + value.properties.country +'</li>');
+					    $.each( data , function( key, value ){					
+						     $('#location-results').append('<li class="location list-group-item" data-location-city="'+value.properties.name+'" data-location-country="'+value.properties.country+'" data-location-coordinates="'+value.geometry.coordinates[1]+','+ value.geometry.coordinates[0] +'">'+value.properties.name + ', ' + value.properties.country +'</li>');
+						});
+
 					});
-
-				});
+				},
+				wait: 500,
+			    highlight: true,
+			    allowSubmit: false,
+			    captureLength: 2
 			});
 
 			$('#location-results').on('click', '.location' ,function(e) {

@@ -7,9 +7,13 @@
 			<h3 class="h5">Find Friends</h3>
 			<form action="/friends" method="POST" id="request-friendship">
 				@csrf
-				<input type="text" name="q" id="friend-search" class="form-control" placeholder="Find a friend to share your travel locations with" autocomplete="off">
-				<input type="hidden" name="email">
-				<ul id="friends-results" class="list-group"></ul>
+				<div class="form-row">
+					<div class="col">
+						<input type="text" name="q" id="friend-search" class="form-control" placeholder="Find a friend to share your travel locations with" autocomplete="off">
+						<input type="hidden" name="email">
+						<ul id="friends-results" class="list-group live-search-results"></ul>
+					</div>
+				</div>
 			</form>
 		</div>
 
@@ -88,16 +92,22 @@
 @section('scripts')
 	<script>
 		$(document).ready(function() {
-			$('#friend-search').on('keyup', function(){
-				$('#friends-results').empty();
+			$('#friend-search').typeWatch( {
+				callback: function (value) {
+					$('#friends-results').empty();
 
-				$.get('/friends/search/?q='+$(this).val(), function( data ) {
+					$.get('/friends/search/?q='+$(this).val(), function( data ) {
 
-				    $.each( JSON.parse(data) , function( key, value ){
-					    $('#friends-results').append('<li class="friend list-group-item d-flex justify-content-between align-items-center" data-request-name="'+value.name+'" data-request-id="'+value.email+'">' + value.name + '&nbsp;<a href="#" class="add-friend btn btn-sm btn-secondary">Add friend</a></li>');
+					    $.each( JSON.parse(data) , function( key, value ){
+						    $('#friends-results').append('<li class="friend list-group-item d-flex justify-content-between align-items-center" data-request-name="'+value.name+'" data-request-id="'+value.email+'">' + value.name + '&nbsp;<a href="#" class="add-friend btn btn-sm btn-secondary">Add friend</a></li>');
+						});
+
 					});
-
-				});
+				},
+				wait: 500,
+			    highlight: true,
+			    allowSubmit: false,
+			    captureLength: 2
 			});
 
 			$('#friends-results').on('click', '.friend' ,function(e) {
