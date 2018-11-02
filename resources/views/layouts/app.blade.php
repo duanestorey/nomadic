@@ -25,6 +25,8 @@
     <link rel="icon" href="/images/icons/Icon-48.png" /> 
     <link rel="icon" sizes="196x196" href="/images/icons/Icon-196.png"> 
 
+    <link rel="manifest" href="/manifest.json">
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
