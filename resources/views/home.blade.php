@@ -54,6 +54,7 @@
 		    maxZoom: 12,
 		    noWrap: true,
 		    worldCopyJump: true,
+		    detectRetina: true,
 		    maxBounds: [
 		        [-90, -180],
 		        [90, 180]
