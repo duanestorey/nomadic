@@ -34,22 +34,8 @@
 
 		<div class="approved-friends-section mt-3">
 			<h3 class="h5">Friends</h3>
-			<ul id="friends-results" class="list-group">
 
-				@if($friends->isEmpty()) 
-					<p>{{ __( 'You currently do not have any friends')}}</p>
-				@else
-					@foreach($friends as $friend)
-						<li class="list-group-item d-flex justify-content-between align-items-center">
-							<span class="name">{{ $friend->name($friend->friend_id) }}&nbsp;&nbsp;</span>
-						</li>
-					@endforeach
-				@endif
-			</ul>
-
-			<br /><br />
-
-			<table id="friends-results" class="table table-bordered">
+			<table id="friends-results" class="table table-bordered table-sm">
 				<thead class="thead-light">
 					<tr>
 						<th scope="col">Name</th>
