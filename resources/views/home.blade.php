@@ -90,8 +90,11 @@
 			@endforeach
 		@endif
 
+		// wiki media - https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png
+		// voyagar - https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png
+
 		map.addLayer(markers);
-L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+		L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png', {
 		    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 		}).addTo(map);
 		/*
