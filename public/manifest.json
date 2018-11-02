@@ -1,5 +1,5 @@
 {
-  "short_name": "Nomadic`",
+  "short_name": "Nomadic",
   "name": "Nomadic - Digital Nomads Near You",
   "icons": [
     {
@@ -11,6 +11,11 @@
       "src": "/images/icons/Icon-128.png",
       "type": "image/png",
       "sizes": "128x128"
+    },
+    {
+      "src": "/images/icons/Icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
   "start_url": "/",
