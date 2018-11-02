@@ -49,6 +49,7 @@
 		    zoom: 4,
 		    fitWorld: true,
 		    minZoom: 2,
+		    maxZoom: 12,
 		    noWrap: true,
 		    worldCopyJump: true,
 		    maxBounds: [
@@ -66,20 +67,30 @@
 		  shadowSize: [41, 41]
 		});
 
+
+		var markers = L.markerClusterGroup();
+
 		
 		@if($location)
-			L.marker([{{ $location->lat }}, {{ $location->lon }}], {icon: greenIcon})
-			 .addTo(map)
-			 .bindPopup('My Location: {{ $location->city }}, {{ $location->country }}');
+			markers.addLayer(
+				L.marker([{{ $location->lat }}, {{ $location->lon }}], {icon: greenIcon})
+				 .bindPopup('My Location: {{ $location->city }}, {{ $location->country }}')
+			);
+			// 
+			//  .addTo(map)
+			//  ;
 		@endif			
 
 		@if($friends)
 			@foreach($friends as $friend)
+			markers.addLayer(
 				L.marker([{{ $friend->lat }}, {{ $friend->lon }}], {})
-				 .addTo(map)
-				 .bindPopup('{{ $friend->name }} is currently in {{ $friend->city }}, {{ $friend->country }}');
+				 .bindPopup('{{ $friend->name }} is currently in {{ $friend->city }}, {{ $friend->country }}')
+			);
 			@endforeach
 		@endif
+
+		map.addLayer(markers);
 
 		L.tileLayer('https://c.tile.openstreetmap.org/{z}/{x}/{y}.png ', {
 		    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
