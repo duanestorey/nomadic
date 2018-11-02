@@ -83,7 +83,7 @@
 
 		@if($friends)
 			@foreach($friends as $friend)
-			markers.addLayer(
+			markers.addLayer( 
 				L.marker([{{ $friend->lat }}, {{ $friend->lon }}], {})
 				 .bindPopup('{{ $friend->name }} is currently in {{ $friend->city }}, {{ $friend->country }}')
 			);
