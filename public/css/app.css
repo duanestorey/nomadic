@@ -11219,14 +11219,31 @@ body.template-home #app > main {
 
 @media (min-width: 768px) {
   .location-form {
-    padding: .7rem 3rem;
+    padding: .7rem 15%;
+  }
+}
+
+@media (min-width: 992px) {
+  .location-form {
+    padding: .7rem 25%;
   }
 }
 
 .location-form > form {
-  background: rgba(255, 255, 255, 0.8);
+  background: white;
   border-radius: 5px;
   padding: 0.5rem;
+}
+
+.location-form > form .form-control {
+  border: 0;
+}
+
+.location-form > form .form-control:focus {
+  border: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  outline: none;
 }
 
 .navbar-laravel {
