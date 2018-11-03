@@ -1,0 +1,23 @@
+// Remove padding on map page
+body.template-home #app > main {
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+	position: relative;
+}
+
+.location-form {
+	position: absolute;
+	z-index: 500;
+	width: 100%;
+	padding:.7rem .7rem;
+	
+	@media (min-width: 768px) {
+		padding:.7rem 3rem;
+	}
+	
+	> form {
+		background: rgba(255,255,255,.8);
+		border-radius: 5px;
+		padding: $spacer / 2;
+	}
+}

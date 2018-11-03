@@ -32,10 +32,10 @@
 </head>
 <body class="template-{{ collect(\Request::segments())->implode('-') }}">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+        <nav class="navbar navbar-expand-md fixed-top navbar-light navbar-laravel">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/home') }}">
-                    Nomadic - {{ __('Digital Nomads Near You' )}}
+                    Nomadic<span class="navbar-brand-tagline"> - {{ __('Digital Nomads Near You' )}}</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -44,7 +44,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                    	@yield('dynamic-nav')
+                
                     </ul>
 
                     <!-- Right Side Of Navbar -->
