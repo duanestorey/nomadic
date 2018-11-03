@@ -2,8 +2,8 @@
 
 @section('content')
 
-	<div class="container-fluid current-location">
-		<form action="/location" method="post">
+	<div class="d-flex justify-content-center current-location">
+		<form action="/location" method="post" class="flex-grow-1 px-4">
 
 			@csrf
 
@@ -21,20 +21,18 @@
 				</div>
 
 				<div class="col-auto">
-					<button href="#" class="btn btn-secondary mb-2 get-location">Detect</button>	
+					<button href="#" class="btn btn-secondary get-location">Detect</button>	
 				</div>
 					
 				<div class="col-auto">
-					<button type="submit" class="btn btn-primary mb-2">Update</button>
+					<button type="submit" class="btn btn-primary">Update</button>
 				</div>
 			</div>
 		</form>
 
 	</div> <!-- /.container-fluid -->
 
-	<div class="container-fluid">
-		<section id="map"></section>
-	</div>
+	<section id="map"></section>
 
 @endsection
 
@@ -54,6 +52,7 @@
 		    maxZoom: 12,
 		    noWrap: true,
 		    worldCopyJump: true,
+		    zoomControl: false,
 		    maxBounds: [
 		        [-90, -180],
 		        [90, 180]
