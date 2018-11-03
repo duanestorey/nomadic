@@ -2,8 +2,8 @@
 
 @section('content')
 
-	<div class="d-flex justify-content-center current-location">
-		<form action="/location" method="post" class="flex-grow-1 px-4">
+	<div class="d-flex justify-content-center location-form">
+		<form action="/location" method="post" class="flex-grow-1">
 
 			@csrf
 

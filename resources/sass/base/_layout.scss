@@ -1,0 +1,12 @@
+html, 
+body, 
+#app,
+#app > main, 
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+	padding-top: 56px;
+}
