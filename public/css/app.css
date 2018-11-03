@@ -11244,3 +11244,31 @@ body.template-register footer {
   background: #e8e8e8;
 }
 
+html.template-home,
+body.template-home,
+body.template-home #app,
+body.template-home #app > main,
+#map {
+  height: 100%;
+  width: 100%;
+}
+
+body.template-home #app > main {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  position: relative;
+}
+
+body.template-home .current-location {
+  position: absolute;
+  z-index: 9999;
+  width: 100%;
+  padding: .7rem 3rem;
+}
+
+body.template-home .current-location > form {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
